@@ -326,4 +326,172 @@ document.addEventListener('DOMContentLoaded', function() {
     
     window.addEventListener('scroll', checkTimelineItems);
     checkTimelineItems(); // Check on initial load
+
+    // ─── J.A.R.V.I.S. Chatbot ───────────────────────────────────────────────────
+
+    const jarvisToggle  = document.getElementById('jarvisToggle');
+    const jarvisChatbot = document.getElementById('jarvisChatbot');
+    const jarvisClose   = document.getElementById('jarvisClose');
+    const jarvisInput   = document.getElementById('jarvisInput');
+    const jarvisSend    = document.getElementById('jarvisSend');
+    const jarvisMessages = document.getElementById('jarvisMessages');
+
+    if (!jarvisToggle) return;
+
+    // Knowledge base for Stellar Skills
+    const jarvisKB = [
+        {
+            patterns: ['hello', 'hi', 'hey', 'good morning', 'good evening', 'greetings'],
+            response: "Good day, sir. J.A.R.V.I.S. at your service. How may I assist you today?"
+        },
+        {
+            patterns: ['who are you', 'what are you', 'your name', 'jarvis'],
+            response: "I am J.A.R.V.I.S. — Just A Rather Very Intelligent System — the AI assistant for Stellar Skills. I am here to answer any queries you may have about our educational solutions."
+        },
+        {
+            patterns: ['what is stellar skills', 'about', 'company', 'who is stellar skills'],
+            response: "Stellar Skills is an educational technology company founded in 2015. Our mission is to bridge the gap between traditional education and the digital future — serving schools, universities, and corporations worldwide."
+        },
+        {
+            patterns: ['services', 'what do you offer', 'what can you do', 'programs'],
+            response: "Stellar Skills offers three flagship service lines:\n• 🏫 K-12 Programs — STEM workshops, coding clubs & digital literacy\n• 🎓 Higher Education — AI labs, career readiness & research support\n• 💼 Corporate Training — digital skills, leadership & custom solutions\n\nWhich area interests you most, sir?",
+            suggestions: ['K-12 Programs', 'Higher Education', 'Corporate Training']
+        },
+        {
+            patterns: ['k-12', 'k12', 'school', 'primary', 'stem'],
+            response: "Our K-12 Programs are designed to ignite curiosity and prepare young learners for a digital world. They include STEM Workshops, Coding Clubs, Digital Literacy initiatives, and Teacher Training. Shall I arrange a consultation for your school?"
+        },
+        {
+            patterns: ['higher education', 'university', 'college', 'university programs'],
+            response: "Our Higher Education solutions include AI Labs, Career Readiness programs, Research Support, and Digital Transformation services. We partner with leading universities to deliver cutting-edge curricula."
+        },
+        {
+            patterns: ['corporate', 'business', 'workforce', 'training', 'company training'],
+            response: "Corporate upskilling is critical in today's rapidly evolving landscape. Our Corporate Training programs cover Digital Skills, Leadership Programs, Technical Training, and fully Custom Solutions tailored to your organisation's needs."
+        },
+        {
+            patterns: ['contact', 'reach', 'talk', 'speak', 'email', 'phone', 'address'],
+            response: "You may reach the Stellar Skills team through the following channels:\n📍 123 Education St, Tech City\n📞 (555) 123-4567\n✉️ info@stellarskills.com\n\nAlternatively, the contact form on this page will connect you with our team directly."
+        },
+        {
+            patterns: ['founded', 'history', 'when', 'year', 'timeline', 'journey'],
+            response: "Stellar Skills was founded in 2015. Key milestones include:\n• 2015 — Founded with a vision to revolutionise EdTech\n• 2017 — Launched our first digital learning platform\n• 2019 — Expanded to higher education partnerships\n• 2022 — Introduced corporate training programmes\n• 2025 — Recognised as an industry leader in educational technology"
+        },
+        {
+            patterns: ['students', 'how many', 'numbers', 'stats', 'statistics'],
+            response: "I am pleased to report that Stellar Skills has trained over 12,500 students and partnered with more than 320 institutions to date. Those numbers continue to grow."
+        },
+        {
+            patterns: ['price', 'cost', 'pricing', 'fee', 'how much'],
+            response: "Pricing is customised based on your institution's requirements and scale. I recommend submitting an enquiry via our contact form, and our team will provide a tailored proposal within 24 hours."
+        },
+        {
+            patterns: ['thank', 'thanks', 'appreciate', 'helpful'],
+            response: "Always a pleasure, sir. Is there anything else I can assist you with?"
+        },
+        {
+            patterns: ['bye', 'goodbye', 'see you', 'exit', 'close'],
+            response: "Farewell, sir. Powering down the interface. Do not hesitate to engage J.A.R.V.I.S. should you require further assistance."
+        }
+    ];
+
+    const fallbackResponses = [
+        "I'm afraid I don't have specific data on that query, sir. May I suggest contacting the Stellar Skills team directly at info@stellarskills.com?",
+        "Interesting query, sir. That falls outside my current knowledge parameters. Would you like to speak with a Stellar Skills consultant instead?",
+        "My apologies — I don't have a precise answer for that. You may want to check our contact form for a more detailed response from our team."
+    ];
+
+    let fallbackIndex = 0;
+
+    function jarvisGetResponse(text) {
+        const lower = text.toLowerCase();
+        for (const entry of jarvisKB) {
+            if (entry.patterns.some(p => lower.includes(p))) {
+                return entry;
+            }
+        }
+        const resp = { response: fallbackResponses[fallbackIndex % fallbackResponses.length] };
+        fallbackIndex++;
+        return resp;
+    }
+
+    function jarvisAddMessage(text, type, suggestions) {
+        const msg = document.createElement('div');
+        msg.className = `jarvis-msg ${type}`;
+        msg.textContent = text;
+        jarvisMessages.appendChild(msg);
+
+        if (suggestions && suggestions.length) {
+            const suggestContainer = document.createElement('div');
+            suggestContainer.className = 'jarvis-suggestions';
+            suggestions.forEach(s => {
+                const btn = document.createElement('button');
+                btn.className = 'jarvis-suggestion';
+                btn.textContent = s;
+                btn.addEventListener('click', () => {
+                    jarvisHandleInput(s);
+                });
+                suggestContainer.appendChild(btn);
+            });
+            jarvisMessages.appendChild(suggestContainer);
+        }
+
+        jarvisMessages.scrollTop = jarvisMessages.scrollHeight;
+    }
+
+    function jarvisShowTyping() {
+        const typing = document.createElement('div');
+        typing.className = 'jarvis-typing';
+        typing.id = 'jarvisTyping';
+        typing.innerHTML = '<span></span><span></span><span></span>';
+        jarvisMessages.appendChild(typing);
+        jarvisMessages.scrollTop = jarvisMessages.scrollHeight;
+        return typing;
+    }
+
+    function jarvisHandleInput(text) {
+        const trimmed = text.trim();
+        if (!trimmed) return;
+
+        jarvisAddMessage(trimmed, 'user');
+        jarvisInput.value = '';
+
+        const typingEl = jarvisShowTyping();
+        const delay = 700 + Math.min(trimmed.length * 10, 800);
+
+        setTimeout(() => {
+            typingEl.remove();
+            const result = jarvisGetResponse(trimmed);
+            jarvisAddMessage(result.response, 'bot', result.suggestions);
+        }, delay);
+    }
+
+    // Toggle open/close
+    jarvisToggle.addEventListener('click', () => {
+        const isOpen = jarvisChatbot.classList.toggle('open');
+        if (isOpen && jarvisMessages.children.length === 0) {
+            // Greeting on first open
+            setTimeout(() => {
+                jarvisAddMessage(
+                    "Good day. I am J.A.R.V.I.S., the AI assistant for Stellar Skills. How may I assist you today, sir?",
+                    'bot',
+                    ['Our Services', 'Contact Info', 'About Us']
+                );
+            }, 300);
+        }
+    });
+
+    jarvisClose.addEventListener('click', () => {
+        jarvisChatbot.classList.remove('open');
+    });
+
+    jarvisSend.addEventListener('click', () => {
+        jarvisHandleInput(jarvisInput.value);
+    });
+
+    jarvisInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+            jarvisHandleInput(jarvisInput.value);
+        }
+    });
 });

@@ -343,6 +343,39 @@
         <i class="fas fa-arrow-up"></i>
     </div>
 
+    <!-- JARVIS Chatbot -->
+    <div class="jarvis-chatbot" id="jarvisChatbot">
+        <div class="jarvis-header">
+            <div class="jarvis-header-info">
+                <div class="jarvis-avatar">
+                    <div class="jarvis-arc-reactor">
+                        <div class="jarvis-arc-inner"></div>
+                    </div>
+                </div>
+                <div>
+                    <div class="jarvis-name">J.A.R.V.I.S.</div>
+                    <div class="jarvis-status"><span class="jarvis-status-dot"></span> Online &amp; Ready</div>
+                </div>
+            </div>
+            <button class="jarvis-close" id="jarvisClose" aria-label="Close chat">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="jarvis-messages" id="jarvisMessages"></div>
+        <div class="jarvis-input-area">
+            <input type="text" class="jarvis-input" id="jarvisInput" placeholder="Ask me anything, sir…" autocomplete="off">
+            <button class="jarvis-send" id="jarvisSend" aria-label="Send message">
+                <i class="fas fa-paper-plane"></i>
+            </button>
+        </div>
+    </div>
+    <button class="jarvis-toggle" id="jarvisToggle" aria-label="Open JARVIS chatbot">
+        <div class="jarvis-toggle-reactor">
+            <div class="jarvis-toggle-inner"></div>
+        </div>
+        <span class="jarvis-toggle-label">J.A.R.V.I.S.</span>
+    </button>
+
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
