@@ -336,7 +336,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const jarvisSend    = document.getElementById('jarvisSend');
     const jarvisMessages = document.getElementById('jarvisMessages');
 
-    if (!jarvisToggle) return;
+    if (!jarvisToggle || !jarvisChatbot || !jarvisClose || !jarvisInput || !jarvisSend || !jarvisMessages) return;
 
     // Knowledge base for Stellar Skills
     const jarvisKB = [
