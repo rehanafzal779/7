@@ -343,6 +343,47 @@
         <i class="fas fa-arrow-up"></i>
     </div>
 
+    <!-- JARVIS Chatbot -->
+    <div class="jarvis-container" id="jarvisContainer">
+        <div class="jarvis-window" id="jarvisWindow">
+            <div class="jarvis-header">
+                <div class="jarvis-header-left">
+                    <div class="jarvis-avatar">
+                        <div class="arc-reactor-small"></div>
+                    </div>
+                    <div class="jarvis-title-group">
+                        <span class="jarvis-name">J.A.R.V.I.S.</span>
+                        <span class="jarvis-status"><span class="status-dot"></span> Online</span>
+                    </div>
+                </div>
+                <button class="jarvis-close" id="jarvisClose" aria-label="Close chat">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="jarvis-messages" id="jarvisMessages">
+                <div class="jarvis-msg jarvis-msg--bot">
+                    <p>Good day. I'm J.A.R.V.I.S. — Just A Rather Very Intelligent System, at your service. How may I assist you today?</p>
+                </div>
+            </div>
+            <div class="jarvis-quick-replies" id="jarvisQuickReplies">
+                <button class="jarvis-quick-btn">Services</button>
+                <button class="jarvis-quick-btn">About Us</button>
+                <button class="jarvis-quick-btn">Contact</button>
+                <button class="jarvis-quick-btn">Help</button>
+            </div>
+            <div class="jarvis-input-row">
+                <input type="text" id="jarvisInput" class="jarvis-input" placeholder="Speak your command..." autocomplete="off" />
+                <button class="jarvis-send" id="jarvisSend" aria-label="Send">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+        <button class="jarvis-fab" id="jarvisFab" aria-label="Open JARVIS assistant">
+            <div class="arc-reactor"></div>
+            <span class="jarvis-fab-label">J.A.R.V.I.S.</span>
+        </button>
+    </div>
+
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
