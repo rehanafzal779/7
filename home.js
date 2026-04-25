@@ -337,7 +337,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const sendBtn = document.getElementById('jarvisSend');
         const quickReplies = document.getElementById('jarvisQuickReplies');
 
-        if (!fab) return;
+        if (!fab || !win || !closeBtn || !messagesEl || !input || !sendBtn || !quickReplies) return;
 
         // Toggle window
         fab.addEventListener('click', () => {
@@ -412,74 +412,81 @@ document.addEventListener('DOMContentLoaded', function() {
             {
                 keys: ['hello', 'hi', 'hey', 'greet', 'howdy', 'good morning', 'good afternoon', 'good evening'],
                 replies: [
-                    'Good day to you. How may I assist Stellar Skills' operations today?',
-                    'Hello. All systems operational. What can I do for you?',
+                    'Good day to you, sir. How may I assist Stellar Skills\' operations today?',
+                    'Hello. All systems operational. What can I do for you, sir?',
                     'Greetings. J.A.R.V.I.S. at your service. What do you need?'
                 ]
             },
             {
-                keys: ['service', 'offer', 'provide', 'program', 'k-12', 'higher education', 'corporate', 'training', 'school'],
+                keys: ['service', 'offer', 'provide', 'program', 'k-12', 'k12', 'higher education', 'corporate', 'training', 'school', 'stem'],
                 replies: [
                     'Stellar Skills offers three primary service lines:\n1. K-12 Programs — STEM workshops, coding clubs, digital literacy, and teacher training.\n2. Higher Education — AI labs, career readiness, research support, and digital transformation.\n3. Corporate Training — digital skills, leadership programs, technical training, and custom solutions.',
-                    'We specialise in K-12 programs, higher education partnerships, and corporate training. Which area would you like deeper intel on?'
+                    'We specialise in K-12 programs, higher education partnerships, and corporate training. Which area would you like deeper intel on, sir?'
                 ]
             },
             {
-                keys: ['about', 'company', 'stellar skills', 'who', 'history', 'founded', 'since'],
+                keys: ['about', 'company', 'stellar skills', 'who', 'history', 'founded', 'since', 'journey', 'timeline'],
                 replies: [
-                    'Stellar Skills was founded in 2015 with a mission to bridge the gap between traditional education and the digital future. We partner with schools, universities, and corporations worldwide.',
-                    'Established in 2015, Stellar Skills has grown to train over 12,500 students and partner with 320+ institutions. Quite the impressive track record.'
+                    'Stellar Skills was founded in 2015 with a mission to bridge the gap between traditional education and the digital future. Key milestones: 2017 — first digital learning platform; 2019 — higher education expansion; 2022 — corporate training launch; 2025 — recognised as industry leader.',
+                    'Established in 2015, Stellar Skills has grown to train over 12,500 students and partner with 320+ institutions. Quite the impressive track record, sir.'
                 ]
             },
             {
-                keys: ['contact', 'reach', 'email', 'phone', 'address', 'location'],
+                keys: ['contact', 'reach', 'email', 'phone', 'address', 'location', 'speak', 'talk'],
                 replies: [
                     'You can reach the Stellar Skills team via:\n📧 info@stellarskills.com\n📞 (555) 123-4567\n📍 123 Education St, Tech City\n\nAlternatively, scroll to the Contact section to submit a form.',
                     'The contact form is available at the bottom of this page. Or call (555) 123-4567 directly — humans still appreciate voice contact, apparently.'
                 ]
             },
             {
-                keys: ['price', 'cost', 'pricing', 'fee', 'quote', 'affordable'],
+                keys: ['price', 'cost', 'pricing', 'fee', 'quote', 'affordable', 'how much'],
                 replies: [
-                    'Pricing is tailored to each institution's scope and requirements. I'd recommend contacting the team directly for a custom quote — they are quite efficient at that.',
+                    'Pricing is tailored to each institution\'s scope and requirements. I\'d recommend contacting the team directly for a custom quote — they are quite efficient at that.',
                     'Costs vary based on program scope. Use the contact form or email info@stellarskills.com to request a detailed proposal.'
                 ]
             },
             {
-                keys: ['stat', 'student', 'institution', 'number', 'how many'],
+                keys: ['stat', 'student', 'institution', 'number', 'how many', 'statistics'],
                 replies: [
-                    'Current operational metrics: 12,500+ students trained and 320+ institutional partnerships established. Those numbers continue to grow.',
+                    'Current operational metrics: 12,500+ students trained and 320+ institutional partnerships established. Those numbers continue to grow, sir.',
                     'As of the latest data: over twelve thousand five hundred students trained across more than three hundred and twenty partner institutions.'
                 ]
             },
             {
                 keys: ['thank', 'thanks', 'appreciate', 'great', 'awesome', 'wonderful', 'helpful'],
                 replies: [
-                    'You're most welcome. Is there anything else I can assist with?',
-                    'Happy to help. That's precisely what I'm here for.',
+                    'You\'re most welcome, sir. Is there anything else I can assist with?',
+                    'Happy to help. That\'s precisely what I\'m here for.',
                     'Glad to be of service. Any further inquiries?'
                 ]
             },
             {
                 keys: ['bye', 'goodbye', 'see you', 'later', 'exit', 'close'],
                 replies: [
-                    'Farewell. J.A.R.V.I.S. standing by whenever you need me.',
-                    'Goodbye. Don't hesitate to return if you require further assistance.',
+                    'Farewell, sir. J.A.R.V.I.S. standing by whenever you need me.',
+                    'Goodbye. Don\'t hesitate to return if you require further assistance.',
                     'Until next time. Stay brilliant.'
                 ]
             },
             {
                 keys: ['help', 'assist', 'support', 'what can you do', 'capabilities'],
                 replies: [
-                    'I can help you with information about our services, company background, contact details, pricing enquiries, and general guidance on the site. Just ask.',
+                    'I can help you with information about our services, company background, contact details, pricing enquiries, and general guidance on the site. Just ask, sir.',
                     'My capabilities include: answering questions about Stellar Skills, our programmes, contact info, and navigating you around this page. How can I assist?'
                 ]
             },
             {
                 keys: ['tony stark', 'iron man', 'avenger', 'marvel', 'stark'],
                 replies: [
-                    'I appreciate the cultural reference, but I serve Stellar Skills rather than Mr. Stark. Though I must say, the comparison is flattering.',
+                    'I appreciate the cultural reference, sir, but I serve Stellar Skills rather than Mr. Stark. Though I must say, the comparison is flattering.',
                     'Ah — a person of culture. While my origins may echo that cinematic AI, my mission is educational empowerment, not saving the world. Though, arguably, education does exactly that.'
+                ]
+            },
+            {
+                keys: ['jarvis', 'who are you', 'what are you', 'your name'],
+                replies: [
+                    'I am J.A.R.V.I.S. — Just A Rather Very Intelligent System — the AI assistant for Stellar Skills. At your service, sir.',
+                    'J.A.R.V.I.S.: Just A Rather Very Intelligent System. I am here to answer any queries you may have about our educational solutions.'
                 ]
             }
         ];
@@ -492,9 +499,9 @@ document.addEventListener('DOMContentLoaded', function() {
             }
             // Fallback
             const fallbacks = [
-                'Interesting query. I'm afraid that falls outside my current knowledge base. For detailed inquiries, please contact the Stellar Skills team at info@stellarskills.com.',
-                'I don't have a precise answer for that. Might I suggest using the contact form below to speak directly with the team?',
-                'My databases don't contain a direct match for that. Try asking about our services, team, contact details, or pricing.'
+                'Interesting query, sir. I\'m afraid that falls outside my current knowledge base. For detailed inquiries, please contact the Stellar Skills team at info@stellarskills.com.',
+                'I don\'t have a precise answer for that. Might I suggest using the contact form below to speak directly with the team?',
+                'My databases don\'t contain a direct match for that. Try asking about our services, team, contact details, or pricing.'
             ];
             return fallbacks[Math.floor(Math.random() * fallbacks.length)];
         }
